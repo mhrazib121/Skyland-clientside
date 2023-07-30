@@ -1,5 +1,9 @@
-import React from "react";
+import { motion } from "framer-motion";
+import ScrollAnimationWrapper from "../Layout/ScrollAnimationWrapper";
 import ProductCard from "./ProductCard";
+import { useMemo } from "react";
+import getScrollAnimation from "@/utils/getScrollAnimation";
+import { MainComponent } from "../Common";
 
 const Products = () => {
   const products = [
@@ -44,17 +48,24 @@ const Products = () => {
       rating: 3,
     },
   ];
+  const scrollAnimation = useMemo(() => getScrollAnimation(), []);
   return (
-    <div>
+    <MainComponent>
       <h1 className="text-4xl font-semibold text-center my-4">
         Featured Products
       </h1>
-      <div className="container mx-auto mt-8 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <ScrollAnimationWrapper className="container mx-auto mt-8 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
         {products.map((product, index) => (
-          <ProductCard key={index} {...product} />
+          <motion.div
+            custom={{ duration: 2 + index }}
+            variants={scrollAnimation}
+            key={index}
+          >
+            <ProductCard {...product} />
+          </motion.div>
         ))}
-      </div>
-    </div>
+      </ScrollAnimationWrapper>
+    </MainComponent>
   );
 };
 

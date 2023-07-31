@@ -4,58 +4,35 @@ import ProductCard from "./ProductCard";
 import { useMemo } from "react";
 import getScrollAnimation from "@/utils/getScrollAnimation";
 import { MainComponent } from "../Common";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { IProduct } from "@/pages";
+import { useState, useEffect } from "react";
 
-const Products = () => {
-  const products = [
-    {
-      productName: "Product 1",
-      image: "/path/to/product1-image.jpg",
-      category: "Category 1",
-      price: 49.99,
-      status: "In Stock",
-      rating: 5,
-    },
-    {
-      productName: "Product 1",
-      image: "/path/to/product1-image.jpg",
-      category: "Category 1",
-      price: 49.99,
-      status: "In Stock",
-      rating: 3,
-    },
-    {
-      productName: "Product 1",
-      image: "/path/to/product1-image.jpg",
-      category: "Category 1",
-      price: 49.99,
-      status: "In Stock",
-      rating: 3,
-    },
-    {
-      productName: "Product 1",
-      image: "/path/to/product1-image.jpg",
-      category: "Category 1",
-      price: 49.99,
-      status: "In Stock",
-      rating: 3,
-    },
-    {
-      productName: "Product 1",
-      image: "/path/to/product1-image.jpg",
-      category: "Category 1",
-      price: 49.99,
-      status: "In Stock",
-      rating: 3,
-    },
-  ];
+const shuffleArray = (array: IProduct[]) => {
+  const shuffledArray = [...array];
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  }
+  return shuffledArray;
+};
+
+const Products = ({ data }: { data: IProduct[] }) => {
   const scrollAnimation = useMemo(() => getScrollAnimation(), []);
+  const [shuffledProducts, setShuffledProducts] = useState<IProduct[]>([]);
+
+  useEffect(() => {
+    const randomData = shuffleArray(data);
+    setShuffledProducts(randomData);
+  }, [data]);
+  console.log("shuffledProducts", shuffledProducts);
   return (
     <MainComponent>
       <h1 className="text-4xl font-semibold text-center my-4">
         Featured Products
       </h1>
       <ScrollAnimationWrapper className="container mx-auto mt-8 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-        {products.map((product, index) => (
+        {shuffledProducts?.slice(0, 5).map((product, index) => (
           <motion.div
             custom={{ duration: 2 + index }}
             variants={scrollAnimation}

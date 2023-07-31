@@ -1,8 +1,9 @@
+import { IProduct } from "@/pages";
 import Image from "next/image";
 import Link from "next/link";
 
 interface ProductCardProps {
-  productName: string;
+  name: string;
   image: string;
   category: string;
   price: number;
@@ -11,26 +12,27 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({
-  productName,
-  image,
+  averageRating,
   category,
   price,
+  image,
+  name,
   status,
-  rating,
-}: ProductCardProps) => {
+  id,
+}: IProduct) => {
   return (
     <div className="bg-white shadow-md rounded-lg p-4 cursor-pointer">
-      <Link href={`products/${productName}`}>
+      <Link href={`products/${id}`}>
         <div className="mb-4">
           <Image
-            width={1}
-            height={1}
+            width={100}
+            height={100}
             src={image}
-            alt={productName}
+            alt={name}
             className="w-full h-40 object-cover rounded-lg"
           />
         </div>
-        <h2 className="text-xl font-semibold mb-2">{productName}</h2>
+        <h2 className="text-xl font-semibold mb-2">{name}</h2>
         <p className="text-gray-600 mb-2">{category}</p>
         <p className="text-lg font-bold text-green-600 mb-2">${price}</p>
         <p
@@ -40,7 +42,7 @@ const ProductCard = ({
         </p>
         <div className="flex items-center">
           <span className="text-yellow-500 flex">
-            {Array.from({ length: rating }, (_, index) => (
+            {Array.from({ length: averageRating }, (_, index) => (
               <svg
                 key={index}
                 xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +59,7 @@ const ProductCard = ({
               </svg>
             ))}
           </span>
-          <span className="ml-1 text-gray-600">{rating} Stars</span>
+          <span className="ml-1 text-gray-600">{averageRating} Stars</span>
         </div>
       </Link>
     </div>

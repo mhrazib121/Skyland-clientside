@@ -2,11 +2,17 @@ import { MainComponent } from "@/components/Common";
 import Products from "@/components/Products";
 import { GetStaticProps } from "next";
 import { IProduct } from "..";
+import { categoriesData } from "@/components/Shared/Navbar";
 
 const ProductsOnCategory = ({ result }: { result: IProduct[] }) => {
   return (
     <MainComponent>
-      <Products data={result} />
+      <div>
+        <h1 className="text-4xl font-bold text-center my-4">
+          {/* {result.} */}
+        </h1>
+        <Products data={result} />
+      </div>
     </MainComponent>
   );
 };
@@ -14,46 +20,11 @@ const ProductsOnCategory = ({ result }: { result: IProduct[] }) => {
 export default ProductsOnCategory;
 
 export const getStaticPaths = async () => {
-  const res = await fetch(`${process.env.BASE_URL}/api/products`);
-  // const data = await res.json();
-
-  const data = [
-    {
-      name: "Graphics Card",
-      link: "graphics-card",
-    },
-    {
-      name: "Motherboard",
-      link: "motherboard",
-    },
-    {
-      name: "RAM",
-      link: "ram",
-    },
-    {
-      name: "Power Supply Unit",
-      link: "psu",
-    },
-    {
-      name: "Storage Device",
-      link: "storage",
-    },
-    {
-      name: "Monitor",
-      link: "monitor",
-    },
-    {
-      name: "Others",
-      link: "others",
-    },
-  ];
-
-  const paths = data.map((product) => {
+  const paths = categoriesData.map((product) => {
     return {
       params: { categoryName: product.link.toString() },
     };
   });
-  console.log("object paths", paths);
 
   return {
     paths,
@@ -68,7 +39,9 @@ export const getStaticProps: GetStaticProps<{
   const categoryName = context?.params?.categoryName;
 
   queryName =
-    categoryName === "ram"
+    categoryName === "processor"
+      ? "Processor"
+      : categoryName === "ram"
       ? "RAM"
       : categoryName === "graphics-card"
       ? "Graphics Card"

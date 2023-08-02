@@ -23,7 +23,7 @@ const ProductCard = ({
 }: IProduct) => {
   return (
     <div className="bg-white border border-orange-200 shadow-md hover:shadow-2xl shadow-orange-200 hover:shadow-orange-200 rounded-lg p-4 cursor-pointer h-[340px] relative">
-      <Link href={`products/${id}`}>
+      <Link href={`/products/${id}`}>
         <div className="mb-4">
           <Image
             width={100}

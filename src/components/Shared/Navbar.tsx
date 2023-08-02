@@ -5,6 +5,40 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button, Logo } from "../Common";
 import ProfileDropdown from "./ProfileDropdown";
+export const categoriesData = [
+  {
+    name: "Processor",
+    link: "processor",
+  },
+  {
+    name: "Graphics Card",
+    link: "graphics-card",
+  },
+  {
+    name: "Motherboard",
+    link: "motherboard",
+  },
+  {
+    name: "RAM",
+    link: "ram",
+  },
+  {
+    name: "Power Supply Unit",
+    link: "psu",
+  },
+  {
+    name: "Storage Device",
+    link: "storage",
+  },
+  {
+    name: "Monitor",
+    link: "monitor",
+  },
+  {
+    name: "Others",
+    link: "others",
+  },
+];
 
 const Navbar = () => {
   const [openProfile, setOpenProfile] = useState<boolean>();
@@ -12,37 +46,7 @@ const Navbar = () => {
   const [openCategories, setOpenCategories] = useState(Boolean);
 
   const categoriesDropDown = useMemo(() => {
-    const data = [
-      {
-        name: "Graphics Card",
-        link: "graphics-card",
-      },
-      {
-        name: "Motherboard",
-        link: "motherboard",
-      },
-      {
-        name: "RAM",
-        link: "ram",
-      },
-      {
-        name: "Power Supply Unit",
-        link: "psu",
-      },
-      {
-        name: "Storage Device",
-        link: "storage",
-      },
-      {
-        name: "Monitor",
-        link: "monitor",
-      },
-      {
-        name: "Others",
-        link: "others",
-      },
-    ];
-    return data;
+    return categoriesData;
   }, []);
 
   return (
@@ -67,7 +71,7 @@ const Navbar = () => {
             className={`${
               !openCategories
                 ? "hidden"
-                : "flex flex-col absolute top-12 bg-white shadow-md rounded-md"
+                : "z-10 flex flex-col absolute top-12 bg-white shadow-md rounded-md"
             }`}
             onMouseEnter={() => setOpenCategories(true)}
             onMouseLeave={() => setOpenCategories(false)}
@@ -75,7 +79,7 @@ const Navbar = () => {
             {categoriesDropDown.map((item) => (
               <div
                 key="item"
-                className="py-2 px-4 hover:bg-orange-200 cursor-pointer"
+                className=" py-2 px-4 hover:bg-orange-200 cursor-pointer"
               >
                 <Link href={`/category/${item.link}`} id="mhr-addBook">
                   <li>{item.name}</li>
@@ -89,7 +93,9 @@ const Navbar = () => {
         </ul>
 
         <div className="flex gap-2">
-          <Button addClass="px-4 py-1">PC Builder</Button>
+          <Link href={"/pc-builder"}>
+            <Button addClass="px-4 py-1">PC Builder</Button>
+          </Link>
           <ul className="hidden md:flex items-center space-x-6">
             {profile ? (
               <div className="relative">

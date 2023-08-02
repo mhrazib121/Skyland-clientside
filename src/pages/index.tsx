@@ -1,10 +1,7 @@
 import { MainComponent } from "@/components/Common";
 import Hero from "@/components/Hero";
-import RootLayout from "@/components/Layout/RootLayout";
 import Products from "@/components/Products";
-import Footer from "@/components/Shared/Footer/Footer";
 import { GetStaticProps } from "next";
-import { ReactElement } from "react";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -12,7 +9,13 @@ export default function Home({ result }: { result: IProduct[] }) {
   return (
     <MainComponent>
       <Hero />
-      <Products data={result} />
+      <div>
+        <h1 className="text-4xl font-bold text-center my-4">
+          Featured Products
+        </h1>
+        <p className="text-lg text-center my-4">Choose your product</p>
+        <Products data={result} />
+      </div>
     </MainComponent>
   );
 }

@@ -28,8 +28,6 @@ const Products = ({ data }: { data: IProduct[] }) => {
   console.log("shuffledProducts", shuffledProducts);
   return (
     <MainComponent>
-      <h1 className="text-4xl font-bold text-center my-4">Featured Products</h1>
-      <p className="text-lg text-center my-4">Choose your product</p>
       <ScrollAnimationWrapper className="container mx-auto mt-8 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
         {shuffledProducts?.slice(0, 6).map((product, index) => (
           <motion.div

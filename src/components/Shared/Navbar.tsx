@@ -14,32 +14,32 @@ const Navbar = () => {
   const categoriesDropDown = useMemo(() => {
     const data = [
       {
-        name: "CPU / Processor",
-        link: "/cpu",
+        name: "Graphics Card",
+        link: "graphics-card",
       },
       {
         name: "Motherboard",
-        link: "/motherboard",
+        link: "motherboard",
       },
       {
         name: "RAM",
-        link: "/ram",
+        link: "ram",
       },
       {
         name: "Power Supply Unit",
-        link: "/psu",
+        link: "psu",
       },
       {
         name: "Storage Device",
-        link: "/storage",
+        link: "storage",
       },
       {
         name: "Monitor",
-        link: "/monitor",
+        link: "monitor",
       },
       {
         name: "Others",
-        link: "/others",
+        link: "others",
       },
     ];
     return data;
@@ -77,7 +77,7 @@ const Navbar = () => {
                 key="item"
                 className="py-2 px-4 hover:bg-orange-200 cursor-pointer"
               >
-                <Link href="/" id="mhr-addBook">
+                <Link href={`/category/${item.link}`} id="mhr-addBook">
                   <li>{item.name}</li>
                 </Link>
               </div>

@@ -19,11 +19,9 @@ async function run(req: NextApiRequest, res: NextApiResponse) {
     await client.connect();
     // Send a ping to confirm a successful connection
     const productCollection = await client.db("skyland").collection("products");
-    console.log("Connected to MongoDB!");
     if (req.method === "GET") {
       // Process a POST request
       const data = await productCollection.find().toArray();
-      console.log("object", data);
       res.send(data);
     } else {
       // Handle any other HTTP method

@@ -1,7 +1,6 @@
 import LogoIcon from "@/assets/logo.svg";
 
 const Logo = () => {
-  console.log("logo", LogoIcon);
   return (
     <div className="flex gap-3 items-center">
       <LogoIcon className="w-[50px] h-[50px] bg-transparent" />

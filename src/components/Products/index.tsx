@@ -25,7 +25,6 @@ const Products = ({ data }: { data: IProduct[] }) => {
     const randomData = shuffleArray(data);
     setShuffledProducts(randomData);
   }, [data]);
-  console.log("shuffledProducts", shuffledProducts);
   return (
     <MainComponent>
       <ScrollAnimationWrapper className="container mx-auto mt-8 grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">

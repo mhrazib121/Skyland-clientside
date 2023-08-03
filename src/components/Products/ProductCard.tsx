@@ -1,7 +1,9 @@
 import { useAddToBuildBtnContext } from "@/ContextApi/AddTobuildBtn";
+import { usePcBuilderContext } from "@/ContextApi/PcBuilderContext";
 import { IProduct } from "@/pages";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import StarRatings from "react-star-ratings";
 
 interface ProductCardProps {
@@ -21,10 +23,31 @@ const ProductCard = ({
   name,
   status,
   id,
+  brand,
+  description,
+  individualRating,
+  keyFeatures,
+  reviews,
 }: IProduct) => {
   const btnIsShowing = useAddToBuildBtnContext();
+  const pcBuilderData = usePcBuilderContext();
+  const router = useRouter();
+  const ProductData = {
+    averageRating,
+    category,
+    price,
+    image,
+    name,
+    status,
+    id,
+    brand,
+    description,
+    individualRating,
+    keyFeatures,
+    reviews,
+  };
   return (
-    <div className="bg-white border border-orange-200 shadow-md hover:shadow-2xl shadow-orange-200 hover:shadow-orange-200 rounded-lg p-4 cursor-pointer h-[340px] relative">
+    <div className="bg-white border border-orange-200 shadow-md hover:shadow-2xl shadow-orange-200 hover:shadow-orange-200 rounded-lg p-4 cursor-pointer h-[390px] relative">
       <Link href={`/products/${id}`}>
         <div className="mb-4">
           <Image
@@ -59,10 +82,54 @@ const ProductCard = ({
               starSpacing="1px"
             />
             <p>({averageRating})</p>
-            {btnIsShowing?.isShowing && <p>ishow</p>}
           </div>
         </div>
       </Link>
+      {btnIsShowing?.isShowing && (
+        <button
+          onClick={() => {
+            if (category === "Processor") {
+              pcBuilderData?.updateState({
+                cpu: ProductData,
+              });
+            }
+            if (category === "Motherboard") {
+              pcBuilderData?.updateState({
+                motherBoard: ProductData,
+              });
+            }
+            if (category === "Monitor") {
+              pcBuilderData?.updateState({
+                monitor: ProductData,
+              });
+            }
+            if (category === "Graphics Card") {
+              pcBuilderData?.updateState({
+                gpu: ProductData,
+              });
+            }
+            if (category === "RAM") {
+              pcBuilderData?.updateState({
+                ram: ProductData,
+              });
+            }
+            if (category === "Power Supply Unit") {
+              pcBuilderData?.updateState({
+                psu: ProductData,
+              });
+            }
+            if (category === "Storage Device") {
+              pcBuilderData?.updateState({
+                storage: ProductData,
+              });
+            }
+            router.push("/pc-builder");
+          }}
+          className="bg-orange-400 hover:bg-orange-600 w-full p-2  rounded-md text-white"
+        >
+          Add to builder
+        </button>
+      )}
     </div>
   );
 };

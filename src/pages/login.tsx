@@ -6,8 +6,6 @@ import Head from "next/head";
 const Login = () => {
   const { data: session } = useSession();
 
-  console.log("login", session);
-
   return (
     <div>
       <Head>

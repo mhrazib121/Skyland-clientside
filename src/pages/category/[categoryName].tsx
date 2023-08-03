@@ -62,7 +62,6 @@ export const getStaticProps: GetStaticProps<{
       `${process.env.BASE_URL}/api/category/${queryName}`
     );
     const result = await res.json();
-    console.log("API Response:", result); // Log the API response to check its content
     return { props: { result } };
   } catch (error) {
     console.error("Error fetching product:", error);

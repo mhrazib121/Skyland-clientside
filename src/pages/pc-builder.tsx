@@ -1,4 +1,5 @@
 import { useAddToBuildBtnContext } from "@/ContextApi/AddTobuildBtn";
+import { usePcBuilderContext } from "@/ContextApi/PcBuilderContext";
 import {
   CpuIcon,
   GpuIcon,
@@ -15,6 +16,8 @@ import { useRouter } from "next/router";
 const PcBuilder = () => {
   const router = useRouter();
   const btnIsShowing = useAddToBuildBtnContext();
+  const builder = usePcBuilderContext();
+
   const selectCpu = () => {
     btnIsShowing?.setIsShowing(true);
     router.push("/category/processor");
@@ -39,6 +42,10 @@ const PcBuilder = () => {
     btnIsShowing?.setIsShowing(true);
     router.push("/category/motherboard");
   };
+  const selectRam = () => {
+    btnIsShowing?.setIsShowing(true);
+    router.push("/category/ram");
+  };
 
   return (
     <MainComponent>
@@ -56,32 +63,43 @@ const PcBuilder = () => {
           label="CPU / Processor"
           icon={CpuIcon}
           selectFn={selectCpu}
+          selectedData={builder?.pcBuildData.cpu}
         />
         <BuilderInput
           label="Mother Board"
           icon={MotherboardIcon}
           selectFn={selectMotherBoard}
+          selectedData={builder?.pcBuildData.motherBoard}
         />
-        <BuilderInput label="RAM" icon={RamIcon} selectFn={selectCpu} />
+        <BuilderInput
+          label="RAM"
+          icon={RamIcon}
+          selectFn={selectRam}
+          selectedData={builder?.pcBuildData.ram}
+        />
         <BuilderInput
           label="Graphics Card"
           icon={GpuIcon}
           selectFn={selectGpu}
+          selectedData={builder?.pcBuildData.gpu}
         />
         <BuilderInput
           label="Power Supply"
           icon={PsuIcon}
           selectFn={selectPsu}
+          selectedData={builder?.pcBuildData.psu}
         />
         <BuilderInput
           label="Monitor"
           icon={MonitorIcon}
           selectFn={selectMonitor}
+          selectedData={builder?.pcBuildData.monitor}
         />
         <BuilderInput
           label="Storage Device"
           icon={StorageIcon}
           selectFn={selectStorage}
+          selectedData={builder?.pcBuildData.storage}
         />
       </div>
     </MainComponent>

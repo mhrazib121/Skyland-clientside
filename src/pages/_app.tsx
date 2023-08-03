@@ -1,4 +1,5 @@
 import BtnArea from "@/ContextApi/AddToBuildBtnArea";
+import PcBuilderArea from "@/ContextApi/PcBuilderArea";
 import Footer from "@/components/Shared/Footer/Footer";
 import Navbar from "@/components/Shared/Navbar";
 import "@/styles/globals.css";
@@ -26,9 +27,11 @@ export default function MyApp({
     <>
       <SessionProvider session={session}>
         <BtnArea>
-          <Navbar />
-          <Component {...pageProps} />
-          <Footer />
+          <PcBuilderArea>
+            <Navbar />
+            <Component {...pageProps} />
+            <Footer />
+          </PcBuilderArea>
         </BtnArea>
       </SessionProvider>
     </>

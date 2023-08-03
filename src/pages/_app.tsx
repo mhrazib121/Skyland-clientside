@@ -1,3 +1,4 @@
+import BtnArea from "@/ContextApi/AddToBuildBtnArea";
 import Footer from "@/components/Shared/Footer/Footer";
 import Navbar from "@/components/Shared/Navbar";
 import "@/styles/globals.css";
@@ -24,9 +25,11 @@ export default function MyApp({
   return getLayout(
     <>
       <SessionProvider session={session}>
-        <Navbar />
-        <Component {...pageProps} />
-        <Footer />
+        <BtnArea>
+          <Navbar />
+          <Component {...pageProps} />
+          <Footer />
+        </BtnArea>
       </SessionProvider>
     </>
   );

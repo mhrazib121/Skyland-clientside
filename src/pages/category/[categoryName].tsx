@@ -1,8 +1,8 @@
 import { MainComponent } from "@/components/Common";
 import Products from "@/components/Products";
+import { categoriesRouteData } from "@/components/Shared/Navbar";
 import { GetStaticProps } from "next";
 import { IProduct } from "..";
-import { categoriesData } from "@/components/Shared/Navbar";
 
 const ProductsOnCategory = ({ result }: { result: IProduct[] }) => {
   return (
@@ -20,7 +20,7 @@ const ProductsOnCategory = ({ result }: { result: IProduct[] }) => {
 export default ProductsOnCategory;
 
 export const getStaticPaths = async () => {
-  const paths = categoriesData.map((product) => {
+  const paths = categoriesRouteData.map((product) => {
     return {
       params: { categoryName: product.link.toString() },
     };

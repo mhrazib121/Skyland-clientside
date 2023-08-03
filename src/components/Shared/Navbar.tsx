@@ -5,7 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button, Logo } from "../Common";
 import ProfileDropdown from "./ProfileDropdown";
-export const categoriesData = [
+import { useAddToBuildBtnContext } from "@/ContextApi/AddTobuildBtn";
+export const categoriesRouteData = [
   {
     name: "Processor",
     link: "processor",
@@ -44,13 +45,14 @@ const Navbar = () => {
   const [openProfile, setOpenProfile] = useState<boolean>();
   const { data: profile } = useSession();
   const [openCategories, setOpenCategories] = useState(Boolean);
+  const isShowBtn = useAddToBuildBtnContext();
 
   const categoriesDropDown = useMemo(() => {
-    return categoriesData;
+    return categoriesRouteData;
   }, []);
 
   return (
-    <div className="max-w-screen-xl py-4 px-8 xl:px-16 mx-auto">
+    <div className="max-w-screen-2xl py-4 px-8 xl:px-16 mx-auto">
       <div className="container flex items-center justify-between">
         <Logo />
         <div></div>
@@ -81,7 +83,13 @@ const Navbar = () => {
                 key="item"
                 className=" py-2 px-4 hover:bg-orange-200 cursor-pointer"
               >
-                <Link href={`/category/${item.link}`} id="mhr-addBook">
+                <Link
+                  href={`/category/${item.link}`}
+                  onClick={() => {
+                    isShowBtn?.setIsShowing(false);
+                  }}
+                  id="mhr-addBook"
+                >
                   <li>{item.name}</li>
                 </Link>
               </div>

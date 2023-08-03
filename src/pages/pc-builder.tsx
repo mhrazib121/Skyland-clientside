@@ -1,3 +1,4 @@
+import { useAddToBuildBtnContext } from "@/ContextApi/AddTobuildBtn";
 import {
   CpuIcon,
   GpuIcon,
@@ -9,14 +10,39 @@ import {
 } from "@/assets/BuilderIcon";
 import BuilderInput from "@/components/BuilderInput";
 import { Button, MainComponent } from "@/components/Common";
+import { useRouter } from "next/router";
 
 const PcBuilder = () => {
+  const router = useRouter();
+  const btnIsShowing = useAddToBuildBtnContext();
   const selectCpu = () => {
-    console.log("object");
+    btnIsShowing?.setIsShowing(true);
+    router.push("/category/processor");
   };
+  const selectGpu = () => {
+    btnIsShowing?.setIsShowing(true);
+    router.push("/category/graphics-card");
+  };
+  const selectPsu = () => {
+    btnIsShowing?.setIsShowing(true);
+    router.push("/category/psu");
+  };
+  const selectMonitor = () => {
+    btnIsShowing?.setIsShowing(true);
+    router.push("/category/monitor");
+  };
+  const selectStorage = () => {
+    btnIsShowing?.setIsShowing(true);
+    router.push("/category/storage");
+  };
+  const selectMotherBoard = () => {
+    btnIsShowing?.setIsShowing(true);
+    router.push("/category/motherboard");
+  };
+
   return (
     <MainComponent>
-      <div className="p-6 border-2 rounded-lg">
+      <div className="p-6 border-2 rounded-lg w-[90%] mx-auto">
         <div className="flex justify-between items-center">
           <h1 className="text-lg font-semibold">
             {" "}
@@ -34,24 +60,28 @@ const PcBuilder = () => {
         <BuilderInput
           label="Mother Board"
           icon={MotherboardIcon}
-          selectFn={selectCpu}
+          selectFn={selectMotherBoard}
         />
         <BuilderInput label="RAM" icon={RamIcon} selectFn={selectCpu} />
         <BuilderInput
           label="Graphics Card"
           icon={GpuIcon}
-          selectFn={selectCpu}
+          selectFn={selectGpu}
         />
         <BuilderInput
           label="Power Supply"
           icon={PsuIcon}
-          selectFn={selectCpu}
+          selectFn={selectPsu}
         />
-        <BuilderInput label="Monitor" icon={MonitorIcon} selectFn={selectCpu} />
+        <BuilderInput
+          label="Monitor"
+          icon={MonitorIcon}
+          selectFn={selectMonitor}
+        />
         <BuilderInput
           label="Storage Device"
           icon={StorageIcon}
-          selectFn={selectCpu}
+          selectFn={selectStorage}
         />
       </div>
     </MainComponent>

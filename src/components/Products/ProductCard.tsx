@@ -1,3 +1,4 @@
+import { useAddToBuildBtnContext } from "@/ContextApi/AddTobuildBtn";
 import { IProduct } from "@/pages";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,6 +22,7 @@ const ProductCard = ({
   status,
   id,
 }: IProduct) => {
+  const btnIsShowing = useAddToBuildBtnContext();
   return (
     <div className="bg-white border border-orange-200 shadow-md hover:shadow-2xl shadow-orange-200 hover:shadow-orange-200 rounded-lg p-4 cursor-pointer h-[340px] relative">
       <Link href={`/products/${id}`}>
@@ -57,6 +59,7 @@ const ProductCard = ({
               starSpacing="1px"
             />
             <p>({averageRating})</p>
+            {btnIsShowing?.isShowing && <p>ishow</p>}
           </div>
         </div>
       </Link>

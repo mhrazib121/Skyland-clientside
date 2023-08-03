@@ -28,7 +28,7 @@ const Products = ({ data }: { data: IProduct[] }) => {
   console.log("shuffledProducts", shuffledProducts);
   return (
     <MainComponent>
-      <ScrollAnimationWrapper className="container mx-auto mt-8 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+      <ScrollAnimationWrapper className="container mx-auto mt-8 grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
         {shuffledProducts?.slice(0, 6).map((product, index) => (
           <motion.div
             custom={{ duration: 2 + index }}
